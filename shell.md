@@ -18,6 +18,8 @@ build.gradle 또는 pom.xml에서 version 정보를 가져올 수 있다고 가�
 ├── logs/ # 로그 저장
 └── deploy.sh # 배포 스크립트
 ✅ 1. 최초 배포 스크립트 deploy.sh
+
+```
 #!/bin/bash
 
 APP_NAME="myapp"
@@ -35,7 +37,11 @@ cp "$TARGET_JAR" "$DEPLOY_DIR/current/$JAR_NAME"
 cd "$DEPLOY_DIR/current" || exit
 nohup java -jar "$JAR_NAME" > "$DEPLOY_DIR/logs/$APP_NAME.log" 2>&1 &
 echo "Spring Boot 앱이 배포되었습니다."
+```
+
 🔁 2. 재배포 스크립트 redeploy.sh (버전 감지 + 백업 포함)
+
+```
 #!/bin/bash
 
 APP_NAME="myapp"
@@ -73,7 +79,11 @@ cp "$JAR_FILE" "$CURRENT_JAR"
 cd "$DEPLOY_DIR/current" || exit
 nohup java -jar "$APP_NAME.jar" > "$DEPLOY_DIR/logs/$APP_NAME.log" 2>&1 &
 echo "버전 [$VERSION] 으로 재배포 완료"
+```
+
 🧪 사용 예시
+
+```
 최초 배포
 
 ./deploy.sh
@@ -91,12 +101,14 @@ backups/ 디렉토리에는 기존 jar가 타임스탬프와 함께 백업됩니
 build/libs/myapp-버전.jar 형태여야 버전 추출이 정상 작동합니다.
 
 필요하면 systemd 등록 방식도 추가로 설명드릴 수 있습니다.
+```
 
 ---
 
 ✅ 1. 서비스 등록 (systemd 사용)
 Spring Boot 앱을 Linux 서비스로 등록하면 재부팅 후 자동 실행 및 status/restart 관리가 편리합니다.
 
+```
 📄 /etc/systemd/system/myapp.service
 [Unit]
 Description=Spring Boot Application - MyApp
@@ -113,8 +125,11 @@ SuccessExitStatus=143
 
 [Install]
 WantedBy=multi-user.target
+```
+
 ▶️ 명령어
 
+```
 # systemd 등록
 
 sudo systemctl daemon-reexec
@@ -128,6 +143,8 @@ sudo systemctl enable myapp
 # 상태 확인
 
 sudo systemctl status myapp
+```
+
 📈 2. 헬스 체크 및 모니터링 (Actuator 활용)
 ✅ Spring Boot Actuator 설정
 build.gradle
