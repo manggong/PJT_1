@@ -19,7 +19,7 @@ build.gradle 또는 pom.xml에서 version 정보를 가져올 수 있다고 가�
 └── deploy.sh # 배포 스크립트
 ✅ 1. 최초 배포 스크립트 deploy.sh
 
-```
+```shell
 #!/bin/bash
 
 APP_NAME="myapp"
@@ -41,7 +41,7 @@ echo "Spring Boot 앱이 배포되었습니다."
 
 🔁 2. 재배포 스크립트 redeploy.sh (버전 감지 + 백업 포함)
 
-```
+```shell
 #!/bin/bash
 
 APP_NAME="myapp"
@@ -83,7 +83,7 @@ echo "버전 [$VERSION] 으로 재배포 완료"
 
 🧪 사용 예시
 
-```
+```shell
 최초 배포
 
 ./deploy.sh
@@ -108,7 +108,7 @@ build/libs/myapp-버전.jar 형태여야 버전 추출이 정상 작동합니다
 ✅ 1. 서비스 등록 (systemd 사용)
 Spring Boot 앱을 Linux 서비스로 등록하면 재부팅 후 자동 실행 및 status/restart 관리가 편리합니다.
 
-```
+```shell
 📄 /etc/systemd/system/myapp.service
 [Unit]
 Description=Spring Boot Application - MyApp
@@ -129,7 +129,7 @@ WantedBy=multi-user.target
 
 ▶️ 명령어
 
-```
+```sehll
 # systemd 등록
 
 sudo systemctl daemon-reexec
